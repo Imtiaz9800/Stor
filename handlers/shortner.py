@@ -26,9 +26,9 @@ async def get_api_key(update: Update, context: ContextTypes.DEFAULT_TYPE):
     shorteners.append({"base_url": base_url, "api_key": api_key})
     context.bot_data["shorteners"] = shorteners
 
-    await update.message.reply_text(f"Shortener added:
-Base URL: {base_url}
-API Key: {api_key}")
+    await update.message.reply_text(
+    f"Shortener added:\nBase URL: {base_url}\nAPI Key: {api_key}"
+    )
     return ConversationHandler.END
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):

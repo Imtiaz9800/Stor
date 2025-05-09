@@ -26,3 +26,11 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+@app.route(f"/{WEBHOOK_SECRET}", methods=["POST"])
+def webhook():
+    if request.headers.get("content-type") == "application/json":
+        update = Update.de_json(request.get_json(force=True), bot)
+        bot.process_new_updates([update])
+        return "OK", 200
+    else:
+        abort(403)
